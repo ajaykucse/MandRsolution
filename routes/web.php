@@ -24,9 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/admin/dashboard','AdminController@index');
 
 Route::group(['middleware' => ['auth']], function(){
+	
+	/*Admin Routes for login and setting*/
 	Route::get('/admin/dashboard','AdminController@index');
 	Route::get('/admin/settings','AdminController@settings');
-	Route::get('/admin/view','ManageMenuController@index');
+
+	/*Routes for manage menu*/
+	Route::get('/admin/view-menu','ManageMenuController@index');
 	Route::get('/admin/manage-menu','ManageMenuController@create');
 	Route::post('/admin/store-menu','ManageMenuController@store');
 	Route::get('/admin/edit-menu/{id}','ManageMenuController@edit');
@@ -35,6 +39,12 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/admin/unactive-menu/{id}','ManageMenuController@unactive');
 	Route::get('/admin/active-menu/{id}','ManageMenuController@active');
 
-});
+	/*Routes for menu items*/
+	Route::get('/admin/view-menu-item','MenuItemController@index');
+	Route::get('admin/menu-item','MenuItemController@create');
+	Route::post('/admin/store-menu-item','MenuItemController@store');
+	Route::get('/findMenuItemName','MenuItemController@findMenuItemName');
 
+});
+/*Routes for logout user*/
 Route::get('/logout','AdminController@logout');

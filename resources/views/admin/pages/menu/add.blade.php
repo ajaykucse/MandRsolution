@@ -24,7 +24,7 @@
             <div class="control-group">
               	<label class="control-label">Is Publish:</label>
               	<div class="controls"> 
-                	<input type="checkbox" name="radios" value="1" checked/>
+                	<input type="checkbox" name="isActive" value="1" id="required" checked/>
                 </div>
             </div>
             <div class="form-actions">

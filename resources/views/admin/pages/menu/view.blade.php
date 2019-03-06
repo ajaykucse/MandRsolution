@@ -5,7 +5,8 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current"><span class="icon"> <i class="icon-eye-open"></i> </span>View Menu</a> </div>
   </div>
-  <div class="container-fluid">
+
+  <div class="container-fluid" style="padding-top: 10px;">
         @if(Session::has('flash_message_error')) 
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert"></button>
