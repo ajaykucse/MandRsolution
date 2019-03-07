@@ -43,7 +43,7 @@ class ManageMenuController extends Controller
             $menu->name = $data['name'];
             $menu->isActive = $data['isActive'];
             $menu->save();
-            return redirect('admin/view')->with('flash_message_success','Menu added successfully');
+            return redirect('admin/view-menu')->with('flash_message_success','Menu added successfully');
         } 
 
          return view('admin.pages.menu.add');

@@ -8,7 +8,8 @@ use App\Menu;
 use App\Page;
 use App\MenuItem;
 use Illuminate\Support\Facades\Input;
- 
+use DB;
+
 class MenuItemController extends Controller
 {
     /**
@@ -69,9 +70,12 @@ class MenuItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id = null)
     {
-        //
+        $menuItemDetails = MenuItem::where(['id'=>$id])->first();
+
+        $menuInfo = Menu::where(['id' => $menuItemDetails->menu_id])->first();
+        return view('admin.pages.menuItem.edit')->with(compact('menuItemDetails','menuInfo'));
     }
 
     /**
@@ -81,9 +85,13 @@ class MenuItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id=null)
     {
-        //
+        $data = $request->all();
+
+        MenuItem::where(['id'=>$id])->update(['menu_item_name'=>$data['menu_item_name']]);
+
+        return redirect('admin/view-menu-item')->with('flash_message_success','Menu item updated successfully');
     }
 
     /**
@@ -94,7 +102,10 @@ class MenuItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+          DB::table('tbl_menu_item')
+            ->where('id',$id)
+            ->delete();
+        return redirect('admin/view-menu-item')->with('flash_message_success','Menu item deleted successfully');
     }
     public function findMenuItemName(Request $request)
     {
@@ -102,4 +113,6 @@ class MenuItemController extends Controller
 
         return response()->json($data);
     }
+
+
 }

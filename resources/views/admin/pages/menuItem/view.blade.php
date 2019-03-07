@@ -37,21 +37,9 @@
               		</div>
             	</div>
           	</div>
-
-          	<div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
-              <thead>
-                <tr>
-                  <th>Manage Order</th>
-                  
-                </tr>
-              </thead>
-              <tbody id="menuItem">
-              
-              </tbody>
-            </table>
-          </div>
-       		
+          	<div class="widget-content nopadding" id="menuItem">
+         	
+          	</div>
         </div>
       </div>
     </div>
@@ -59,12 +47,14 @@
 </div>
 
 
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+$(document).ready(function(){
 
 		$(document).on('change','.menuName',function(){
 			
@@ -74,6 +64,7 @@
 			var div=$(this).parent();
 			 
 			 var op= " ";
+			 
 
 		 	$.ajax({
 		 		type:'get',
@@ -86,20 +77,20 @@
 					//console.log(data);
 
 					//console.log(data.length);
+
+					  
 					 
 					for(var i=0;i<data.length;i++){
 
-					// op+='<li>' +data[i].menu_item_name+  '<a src="#">' + '<i class="fas fa-user">' +'</i>' + '</a>' + '</li>';
-					   op+= '<tr class="gradeX"' 
-					   		
-					   		+ '<td>' +data[i].menu_item_name+ '</td>'
+				  
 
-					   		'</tr>';
+					op+="<ul id=\"dos\"> <li> <span> "+data[i].menu_item_name+" # "+data[i].id+" </span> <a href=\"#\" class=\"btn btn-success btn-mini\"> <i class=\"fas fa-thumbs-up\"></i> </a> <a href=\"#\" class=\"btn btn-primary btn-mini\"> <i class=\"fab fa-asymmetrik\"></i> </a> <a href=\"/admin/delete-menu-item/"+data[i].id+"\" class=\"btn btn-danger btn-mini\"> <i class=\"fas fa-trash-alt\"></i> </a> <a href=\"/admin/edit-menu-item/"+data[i].id+"\" class=\"btn btn-primary btn-mini\"> <i class=\"fas fa-edit\"></i> </a> <a href=\"#\" class=\"btn btn-success btn-mini\"> <i class=\"fas fa-link\"></i> </a> </ul";
 
+					
 				   }
-				   
-				   $('.gradeX').empty();
-				   $('.gradeX').append(op);
+				    
+				   $('#menuItem').empty();
+				   $('#menuItem').append(op);
 				   
 
 				  
@@ -120,7 +111,37 @@
 
 </script>
 
+<style>
+	
+	#dos{
+		list-style-type: none;
+		margin-top: 10px;
+		padding: 5px;
+	}
 
+	#dos li{ 
+		font-size: 15px;
+		padding: 5px;
+		border: 2px solid gray;
+  		padding: 5px;
+  		border-radius: 2px;
+  		margin-top: 5px;
+	} 
+
+	#dos li a{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	#dos span{
+		margin-right: 400px;
+		 
+
+		height: 50px;
+		width: 100px;
+	}
+
+</style>
 
 
 

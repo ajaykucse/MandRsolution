@@ -44,7 +44,16 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('admin/menu-item','MenuItemController@create');
 	Route::post('/admin/store-menu-item','MenuItemController@store');
 	Route::get('/findMenuItemName','MenuItemController@findMenuItemName');
+	Route::get('/admin/delete-menu-item/{id}','MenuItemController@destroy');
+	Route::get('/admin/edit-menu-item/{id}','MenuItemController@edit');
+	Route::post('/admin/update-menu-item/{id}','MenuItemController@update');
 
+
+	/*Routes for Article*/
+	Route::get('/admin/view-article','ArticleController@index');
+	Route::get('/admin/new-article','ArticleController@create');
+	Route::post('/admin/store-article','ArticleController@store');
+ 
 });
 /*Routes for logout user*/
 Route::get('/logout','AdminController@logout');
