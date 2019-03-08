@@ -28,7 +28,7 @@
             	<span>Menu Name :</span>
             	<div class="control-group" style="margin-left: 220px; margin-top: -21px;">
               		<div class="controls">
-                		<select class="menuName" name="menu_id" style="width: 420px;">
+                		<select autocomplete="off" class="menuName" name="menu_id" style="width: 420px;">
                 			<option value="0" selected>Select...</option>
                  			@foreach($menus as $menu)
                   			<option value="{{$menu->id}}">{{ $menu->name }}</option>
@@ -37,17 +37,29 @@
               		</div>
             	</div>
           	</div>
-          	<div class="widget-content nopadding" id="menuItem">
-         	
+          	<div class="widget-content nopadding" >
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr class="left">
+                  <th>Sl.</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="menuItem">
+              	
+              </tbody>
+            </table>
           	</div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
+<tbody>
+	<tr>
+		
+	</tr>
+</tbody>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -58,88 +70,52 @@ $(document).ready(function(){
 
 		$(document).on('change','.menuName',function(){
 			
-
 			var menu_id=$(this).val();
 
 			var div=$(this).parent();
 			 
-			 var op= " ";
-			 
+			 var op= " ";	 
 
 		 	$.ajax({
 		 		type:'get',
 		 		url:'{!!URL::to('findMenuItemName')!!}',
 		 		data:{'id':menu_id},
-		 		cache: false,
+		 		 
 		 			success:function(data){
 					//console.log('success');
 
 					//console.log(data);
 
 					//console.log(data.length);
-
-					  
 					 
 					for(var i=0;i<data.length;i++){
 
-				  
-
-					op+="<ul id=\"dos\"> <li> <span> "+data[i].menu_item_name+" # "+data[i].id+" </span> <a href=\"#\" class=\"btn btn-success btn-mini\"> <i class=\"fas fa-thumbs-up\"></i> </a> <a href=\"#\" class=\"btn btn-primary btn-mini\"> <i class=\"fab fa-asymmetrik\"></i> </a> <a href=\"/admin/delete-menu-item/"+data[i].id+"\" class=\"btn btn-danger btn-mini\"> <i class=\"fas fa-trash-alt\"></i> </a> <a href=\"/admin/edit-menu-item/"+data[i].id+"\" class=\"btn btn-primary btn-mini\"> <i class=\"fas fa-edit\"></i> </a> <a href=\"#\" class=\"btn btn-success btn-mini\"> <i class=\"fas fa-link\"></i> </a> </ul";
-
+					op+="<tr class=\"gradeX\"> <td> "+data[i].menu_item_name+" # "+data[i].id+"</td> <td class=\"center\" id=\"dos\">  <a href=\"/admin/publish-menu-item/"+data[i].id+"\" class=\"btn btn-success btn-mini\" title=\"Publish\"> <i class=\"fas fa-thumbs-up\"></i> </a> <a href=\"/admin/is-front/"+data[i].id+"\" class=\"btn btn-primary btn-mini\" title=\"Is Front\"> <i class=\"fab fa-asymmetrik\"></i> </a> <a href=\"/admin/delete-menu-item/"+data[i].id+"\" class=\"btn btn-danger btn-mini\" title=\"Delete\"> <i class=\"fas fa-trash-alt\"></i> </a> <a href=\"/admin/edit-menu-item/"+data[i].id+"\" class=\"btn btn-primary btn-mini\" title=\"Edit\"> <i class=\"fas fa-edit\"></i> </a> <a href=\"#\" class=\"btn btn-success btn-mini\" title=\"Link to Article\"> <i class=\"fas fa-link\"></i> </a></td> </tr>";
 					
 				   }
 				    
 				   $('#menuItem').empty();
 				   $('#menuItem').append(op);
-				   
-
-				  
 				    
 				},
 
-
 				error:function(){
-
 				}
- 
 		 		 
 		 	});
-
 		});
-
  });
-
 </script>
-
 <style>
 	
-	#dos{
-		list-style-type: none;
+	tr.gradeX{
+		padding:10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
 		margin-top: 10px;
-		padding: 5px;
+		margin-bottom: 10px;
 	}
-
-	#dos li{ 
-		font-size: 15px;
-		padding: 5px;
-		border: 2px solid gray;
-  		padding: 5px;
-  		border-radius: 2px;
-  		margin-top: 5px;
-	} 
-
-	#dos li a{
-		margin-left: 5px;
-		margin-right: 5px;
-	}
-
-	#dos span{
-		margin-right: 400px;
-		 
-
-		height: 50px;
-		width: 100px;
-	}
+	 
 
 </style>
 

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
  
 use Illuminate\Http\Request;
+//use Request;
 use App\Menu;
 use App\Page;
 use App\MenuItem;
@@ -45,12 +45,7 @@ class MenuItemController extends Controller
     {       
             MenuItem::create(Request::all());
            
-            return 'successfully';
-            // dd('MenuItem'); die;
-
-
-            // $menuItems->save();
-            // return redirect('admin/view')->with('flash_message_success','Menu added successfully');
+            return redirect('admin/view-menu-item')->with('flash_message_success','Menu item added successfully');
     }
 
     /**
@@ -112,6 +107,20 @@ class MenuItemController extends Controller
         $data=MenuItem::select('menu_item_name','id')->where('menu_id',$request->id)->take(100)->get();
 
         return response()->json($data);
+    } 
+    public function publish($id)
+    {
+        DB::table('tbl_menu_item')
+            ->where('id',$id)
+            ->update(['is_publish' => 1]);
+        return redirect('admin/view-menu-item')->with('flash_message_success','Menu Item Publish successfully');
+    }
+    public function is_front($id)
+    {
+        DB::table('tbl_menu_item')
+            ->where('id',$id)
+            ->update(['is_front' => 1]);
+        return redirect('admin/view-menu-item')->with('flash_message_success','Menu Item Is Front successfully');
     }
 
 

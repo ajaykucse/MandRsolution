@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
-
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
 
 </head>
 <body>
@@ -32,6 +32,7 @@
   @include('layouts.backend.sidebar')
 
 <!--end sidebar-->
+
 
 
 
@@ -56,7 +57,6 @@
 
  
 
-
 <script src="{{ asset('js/backend/jquery.min.js')}}"></script> 
 <script src="{{ asset('js/backend/jquery.ui.custom.js')}}"></script> 
 <script src="{{ asset('js/backend/bootstrap.min.js')}}"></script> 
@@ -67,8 +67,6 @@
 <script src="{{ asset('js/backend/matrix.js')}}"></script> 
 <script src="{{ asset('js/backend/matrix.form_validation.js')}}"></script>
 <script src="{{ asset('js/backend/matrix.tables.js')}}"></script>
- 
-
 
 
 </body>

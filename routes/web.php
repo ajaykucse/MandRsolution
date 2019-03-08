@@ -47,12 +47,18 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/admin/delete-menu-item/{id}','MenuItemController@destroy');
 	Route::get('/admin/edit-menu-item/{id}','MenuItemController@edit');
 	Route::post('/admin/update-menu-item/{id}','MenuItemController@update');
+	Route::get('/admin/publish-menu-item/{id}','MenuItemController@publish');
+	Route::get('/admin/is-front/{id}','MenuItemController@is_front');
 
 
 	/*Routes for Article*/
 	Route::get('/admin/view-article','ArticleController@index');
 	Route::get('/admin/new-article','ArticleController@create');
 	Route::post('/admin/store-article','ArticleController@store');
+	Route::get('/findArticleName','ArticleController@findArticleName');
+	Route::get('/admin/delete-article/{id}','ArticleController@destroy');
+	Route::get('/admin/publish-article/{id}','ArticleController@publish');
+	Route::get('/admin/edit-article/{id}','ArticleController@edit');
  
 });
 /*Routes for logout user*/
