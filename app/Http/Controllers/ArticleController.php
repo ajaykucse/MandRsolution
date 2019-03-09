@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use Request;
 use App\Article;
+use App\Page;
 use DB;
 class ArticleController extends Controller
 {
@@ -63,10 +64,10 @@ class ArticleController extends Controller
      */
     public function edit(Request $request, $id=null)
     {
-        //$menuItemDetails = MenuItem::where(['id'=>$id])->first();
+        $articleDetails = Article::where(['id'=>$id])->first();
 
-        //$menuInfo = Menu::where(['id' => $menuItemDetails->menu_id])->first();
-        return view('admin.pages.article.edit');
+        $pageInfo = Page::all();
+        return view('admin.pages.article.edit')->with(compact('articleDetails','pageInfo'));
     }
 
     /**
@@ -78,7 +79,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+            Article::where(['id'=>$id])->update(['title'=>$data['title'],'short_content'=>$data['short_content'],'read_more_content'=>$data['read_more_content'],'search_keyword'=>$data['search_keyword'],'search_desc'=>$data['search_desc'],'special_desc'=>$data['special_desc'],'Price'=>$data['Price'],'ProductCode'=>$data['ProductCode']]);
+         
+        return redirect('admin/view-article')->with('flash_message_success','Article updated successfully');
     }
 
     /**

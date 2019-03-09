@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/admin/delete-article/{id}','ArticleController@destroy');
 	Route::get('/admin/publish-article/{id}','ArticleController@publish');
 	Route::get('/admin/edit-article/{id}','ArticleController@edit');
+	Route::post('/admin/update-article/{id}','ArticleController@update');
  
 });
 /*Routes for logout user*/

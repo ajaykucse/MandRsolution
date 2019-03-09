@@ -13,14 +13,13 @@
             <h5>Edit Article</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('admin/update-menu-item/')}}" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="{{ url('admin/update-article/'.$articleDetails->id)}}" name="basic_validate" id="basic_validate" novalidate="novalidate">
               {{ csrf_field() }}
           
-           
           		<div class="control-group">
             	<label class="control-label">Article Name :</label>
                 	<div class="controls">
-                  		<input type="text" value="" name="menu_item_name" id="required" required style="width: 300px;">
+                  		<input type="text" value="{{$articleDetails->title}}" name="title" id="required" required style="width: 300px;">
                 	</div>
             	</div>
           	 
@@ -28,8 +27,10 @@
               <label class="control-label">Type :</label>
               <div class="controls">
                 <select name="page_name" style="width: 320px;">
-                  <option value="0" selected="true">#</option>
-                  <option value=""></option>
+                  <option value="0" selected></option>
+                  @foreach($pageInfo as $pages)
+                  	<option value="{{$pages->page_id}}">{{$pages->page_name}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -37,31 +38,31 @@
             <div class="control-group">
             	<label class="control-label">Product Code :</label>
                 <div class="controls">
-                  <input type="text" value="" name="menu_item_name" id="required" required style="width: 300px;">
+                  <input type="text" value="{{$articleDetails->ProductCode}}" name="ProductCode" id="required" required style="width: 300px;">
                 </div>
             </div>
             <div class="control-group">
             	<label class="control-label">Price :</label>
                 <div class="controls">
-                  <input type="text" value="0" name="menu_item_name" id="required" required style="width: 300px;">
+                  <input type="text" value="{{$articleDetails->Price}}" name="Price" id="required" required style="width: 300px;">
                 </div>
             </div>
             <div class="control-group">
             	<label class="control-label">Short Content :</label>
             	<div class="controls">
-           			<textarea class="form-control" id="short-content" name="summary-ckeditor"></textarea>
+           			<textarea class="form-control" id="short-content" name="short_content">{{$articleDetails->short_content}}</textarea>
              	</div>
             </div>
              <div class="control-group">
             	<label class="control-label">Read More Content :</label>
             	<div class="controls">
-           			<textarea class="form-control" id="article-ckeditor" name="summary-ckeditor"></textarea>
+           			<textarea class="form-control" id="article-ckeditor" name="read_more_content">{{$articleDetails->read_more_content}}</textarea>
              	</div>
             </div>
              <div class="control-group">
             	<label class="control-label">Special Desc :</label>
             	<div class="controls">
-           			<textarea class="form-control" id="special-desc" name="summary-ckeditor"></textarea>
+           			<textarea class="form-control" id="special-desc" name="special_desc">{{$articleDetails->special_desc}}</textarea>
              	</div>
             </div>
             <div class="control-group">
@@ -78,7 +79,7 @@
     		<div class="control-group">
             	<label class="control-label">URL Link :</label>
                 <div class="controls">
-                  <input type="text" value="" name="menu_item_name" id="required" required style="width: 200px;">
+                  <input type="text" value="" name="ht" id="required" required style="width: 200px;">
                 </div>
             </div>
              <div class="control-group">
@@ -89,13 +90,13 @@
     		<div class="control-group">
             	<label class="control-label">SEO Key :</label>
             	<div class="controls">
-           			<textarea class="form-control" id="seo-ckeditor" name="summary-ckeditor"></textarea>
+           			<textarea class="form-control" id="seo-ckeditor" name="search_keyword">{{$articleDetails->search_keyword}}</textarea>
              	</div>
             </div>
             <div class="control-group">
             	<label class="control-label">SEO Description :</label>
             	<div class="controls">
-           			<textarea class="form-control" id="seo-desc" name="summary-ckeditor"></textarea>
+           			<textarea class="form-control" id="seo-desc" name="search_desc">{{$articleDetails->search_desc}}</textarea>
              	</div>
             </div>
             <div class="form-actions">
