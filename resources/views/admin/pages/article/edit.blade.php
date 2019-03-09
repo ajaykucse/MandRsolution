@@ -13,7 +13,7 @@
             <h5>Edit Article</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('admin/update-article/'.$articleDetails->id)}}" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="{{ url('admin/update-article/'.$articleDetails->id)}}" name="basic_validate" id="basic_validate" novalidate="novalidate" enctype="multipart/form-data">
               {{ csrf_field() }}
           
           		<div class="control-group">
@@ -68,7 +68,7 @@
             <div class="control-group">
     			<label class="control-label" for="ControlFile">Featured Photo :</label>
     			<div class="controls">
-    				<input class="form-control-file" id="exampleFormControlFile1" type="file">
+    				<input class="form-control-file" id="exampleFormControlFile1" name="file_name" type="file">
     			</div>
   			</div>
   			 <div class="control-group">

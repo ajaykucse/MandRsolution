@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 //use Request;
 use App\Article;
 use App\Page;
+use App\File;
 use DB;
 class ArticleController extends Controller
 {
@@ -82,9 +83,24 @@ class ArticleController extends Controller
         $data = $request->all();
 
             Article::where(['id'=>$id])->update(['title'=>$data['title'],'short_content'=>$data['short_content'],'read_more_content'=>$data['read_more_content'],'search_keyword'=>$data['search_keyword'],'search_desc'=>$data['search_desc'],'special_desc'=>$data['special_desc'],'Price'=>$data['Price'],'ProductCode'=>$data['ProductCode']]);
+
+        if($file_info = $request->file('file_name'))
+        {
+            $name = $file_info->getClientOriginalName();
+
+            if($file_info->move('file_name',$name)){
+
+                $post = new File();
+                $post->file_name=$name;
+                $post->article_id=$id;
+                $post->save();
+                //return "successfully save";
+            };
+
+        }
          
         return redirect('admin/view-article')->with('flash_message_success','Article updated successfully');
-    }
+        }
 
     /**
      * Remove the specified resource from storage.
